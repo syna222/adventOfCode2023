@@ -11,6 +11,8 @@ def reach(start_pos, n): #n = number of steps
         coords = []
         for p in pre:
             a, b = p
+            a %= len(file_data)
+            b %= len(file_data[0])
             if 0 <= a < len(file_data) and 0 <= b < len(file_data[0]) and file_data[a][b] != "#":
                 coords.append(p)
         return coords
@@ -21,6 +23,8 @@ def reach(start_pos, n): #n = number of steps
             x, y = pos
             # For each position, add all positions one step away + check if none of them are a hash:
             for nx, ny in [(x-1, y), (x, y-1), (x, y+1), (x+1, y)]:
+                nx %= len(file_data)
+                ny %= len(file_data)
                 if 0 <= nx < len(file_data) and 0 <= ny < len(file_data[0]) and file_data[nx][ny] != "#":
                     new_positions.add((nx, ny))
         return list(new_positions)  # Convert set back to list
